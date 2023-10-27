@@ -22,7 +22,10 @@ app.Use(async (HttpContext context, RequestDelegate next) =>
 // register the customer middleware class - MyCustomMiddleware
 //app.UseMiddleware<MyCustomMiddleware>();
 // call extension method from Custom middleware class
-app.UseMiddleware<MyCustomMiddleware>();    
+//app.UseMiddleware<MyCustomMiddleware>(); 
+
+// call the extension method create by item template
+app.UseHelloCustomMiddleware(); 
 
 // use Run() extension method to execute a terminating middleware
 app.Run(async (HttpContext context) =>
