@@ -1,7 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// use Use() method extension to excute a non terminating middleware
+// use Use() extension method to excute a non terminating middleware
 app.Use(async (HttpContext context, RequestDelegate next) =>
 {
     await context.Response.WriteAsync("Hello, and ");
