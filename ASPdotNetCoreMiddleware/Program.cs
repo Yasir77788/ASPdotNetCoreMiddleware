@@ -20,12 +20,14 @@ app.Use(async (HttpContext context, RequestDelegate next) =>
 });
 
 // register the customer middleware class - MyCustomMiddleware
+//app.UseMiddleware<MyCustomMiddleware>();
+// call extension method from Custom middleware class
 app.UseMiddleware<MyCustomMiddleware>();    
 
 // use Run() extension method to execute a terminating middleware
 app.Run(async (HttpContext context) =>
 {
-    await context.Response.WriteAsync("Hello3 from a teminating mdw");
+    await context.Response.WriteAsync("Hello3 from a teminating mdw\n");
     
 });
 
