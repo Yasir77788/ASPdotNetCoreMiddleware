@@ -25,7 +25,26 @@ app.Use(async (HttpContext context, RequestDelegate next) =>
 //app.UseMiddleware<MyCustomMiddleware>(); 
 
 // call the extension method create by item template
-app.UseHelloCustomMiddleware(); 
+app.UseHelloCustomMiddleware();
+
+
+// UseWhen()
+app.UseWhen(
+    context => context.Request.Query.ContainsKey("username"), 
+    app =>
+    {
+        app.Use(async (context, next) => 
+        {
+            await context.Response.WriteAsync("Hello from Middleware UseWhen branch\n");
+            await next(context);
+        });
+    }
+    );
+app.Run(async (context) =>
+{
+    await context.Response.WriteAsync("Hello from Middleware Chain");
+
+});
 
 // use Run() extension method to execute a terminating middleware
 app.Run(async (HttpContext context) =>
